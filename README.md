@@ -1,3 +1,26 @@
+# Mud Nernst Mod
+
+1. 增加根目录挂载支持
+2. 修复MySQL索引创建错误
+3. 引用alpine清华源，使用本地发行包(由PrivateBin官方下载，暂使用1.3.4)
+
+***注：Docker下挂载`/srv`目录需要提前设置`host`对应目录权限：`chown -R 65534:82 <path/to/mount>`***
+
+Docker Image参见 <https://hub.docker.com/r/mudnernst1217/privatebin>
+
+## Docker运行示例(基于MySQL)
+
+```
+docker run \
+--name privatebin \
+--publish 30080:8080 \
+--volume /data/paperplane/root:/srv \
+--env TZ="Asia/Shanghai" \
+--env PHP_TZ="Asia/Shanghai" \
+--detach --restart=always \
+mudnernst1217/privatebin
+```
+
 # PrivateBin on nginx, php-fpm & alpine
 
 **PrivateBin** is a minimalist, open source online [pastebin](https://en.wikipedia.org/wiki/Pastebin) where the server has zero knowledge of pasted data. Data is encrypted and decrypted in the browser using 256bit AES in [Galois Counter mode](https://en.wikipedia.org/wiki/Galois/Counter_Mode).
